@@ -38,7 +38,7 @@ function createUser(username, userId) {
     });
 };
 
-function showUrl(username, usrId) {
+function showUrl(username, userId) {
     const url = getFormattedUrl(username);
     bot.sendMessage(userId, url);
 }
