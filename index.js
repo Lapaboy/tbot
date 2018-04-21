@@ -10,7 +10,7 @@ const bot = new TelegramBot(TOKEN, {polling: true});
 
 bot.onText(/(.*)/, function (msg, match) {
     const userId = msg.from.id;
-    if (msg.chat.type === 'private') {
+    if (msg.chat.type !== 'private') {
         //log request from chat
         bot.sendMessage(userId, ERRORS.NOT_PRIVATE);
         return;
@@ -19,10 +19,12 @@ bot.onText(/(.*)/, function (msg, match) {
     //escape here
     exec(`id -u ${msg.from.username}`, (err, stdout) => {
         if (typeof parseInt(stdout) !== 'number') {
+            console.log('CREATE', stdout);
             createUser(msg.from.username, userId);
         } else {
             //log existed user reqesting url
             showUrl(msg.from.username, userId);
+            console.log('EXIST!', stdout);
         }
     });
 });
