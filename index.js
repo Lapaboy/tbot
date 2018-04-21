@@ -18,7 +18,7 @@ bot.onText(/(.*)/, function (msg, match) {
 
     //escape here
     exec(`id -u ${msg.from.username}`, (err, stdout) => {
-        if (typeof parseInt(stdout) !== 'number') {
+        if (!stdout.length) {
             console.log('CREATE', stdout);
             createUser(msg.from.username, userId);
         } else {
