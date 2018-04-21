@@ -18,6 +18,8 @@ bot.onText(/(.*)/, function (msg, match) {
 
     //escape here
     exec(`id -u ${msg.from.username}`, (err, stdout) => {
+        console.log('This is stdout>>');
+        console.log('length:', stdout.length);
         if (!stdout.length) {
             console.log('CREATE', stdout);
             createUser(msg.from.username, userId);
