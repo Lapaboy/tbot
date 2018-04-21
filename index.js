@@ -1,12 +1,12 @@
 const TelegramBot = require('node-telegram-bot-api');
+const TOKEN = require('./access').TOKEN;
 const exec = require('child_process').exec;
 
 const ERRORS = {
     NOT_PRIVATE: 'Chat should be private!'
 }
-const TOKEN = '577021868:AAFW3ltJM4NAs75LYJPta19Ac7bFKX1JBLU';
-const bot = new TelegramBot(TOKEN, {polling: true});
 
+const bot = new TelegramBot(TOKEN, {polling: true});
 
 bot.onText(/(.*)/, function (msg, match) {
     const userId = msg.from.id;
