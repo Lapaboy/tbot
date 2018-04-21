@@ -33,9 +33,8 @@ bot.onText(/(.*)/, function (msg, match) {
 
 function createUser(username, userId) {
     //escape here
-    exec(`echo ${username} | passwd ${username} --stdin`, (err, stdout) => {
+    exec(`echo -e '${username}\n${username}\n' | sudo passwd ${username}`, (err, stdout) => {
         //log usercreated
-        console.log('user created?\n', stdout);
         showUrl(username, userId);
     });
 };
