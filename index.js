@@ -1,5 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
-const TOKEN = require('./access').TOKEN;
+const {TOKEN, IP_ADRESS, PORT} = require('./access');
 const exec = require('child_process').exec;
 
 const ERRORS = {
@@ -40,3 +40,7 @@ function showUrl(username, usrId) {
     const url = getFormattedUrl(username);
     bot.sendMessage(userId, url);
 }
+
+function getFormattedUrl(name) {
+    return `https://t.me/socks?server=${IP_ADRESS}&port=${PORT}&user=${name}&pass=${name}`;
+};
