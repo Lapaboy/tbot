@@ -39,9 +39,10 @@ function createUser(username, userId) {
     exec(`useradd -MNs /bin/false ${username}`, (err, stdout) => {
         //log usercreated
         showUrl(username, userId);
+        exec(`sudo echo "${username}:${username}" | chpasswd`, ()=>{});
     });
 
-    exec(`sudo echo "${username}:${username}" | chpasswd`);
+    
 
     
     // exec(`sudo echo ${username} | passwd ${username} --stdin`, (err, stdout) => {
