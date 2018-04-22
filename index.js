@@ -36,7 +36,7 @@ bot.onText(/(.*)/, function (msg, match) {
 
 function createUser(username, userId) {
     //escape here
-    exec(`sudo useradd -MNs /bin/false -p "${username}" ${username}`, (err, stdout) => {
+    exec(`sudo useradd -MNs /bin/false ${username};sudo echo ${username} | passwd ${username} --stdin`, (err, stdout) => {
         //log usercreated
         showUrl(username, userId);
     });
