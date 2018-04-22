@@ -18,10 +18,8 @@ bot.onText(/(.*)/, function (msg, match) {
 
     //escape here
     exec(`id -u ${msg.from.username}`, (err, stdout) => {
-        console.log('This is stdout>>');
         console.log('length:', stdout.length);
         if (!stdout.length) {
-            console.log('CREATE', stdout);
             createUser(msg.from.username, userId);
         } else {
             //log existed user reqesting url
@@ -33,7 +31,7 @@ bot.onText(/(.*)/, function (msg, match) {
 
 function createUser(username, userId) {
     //escape here
-    exec(`echo -e '${username}\n${username}\n' | sudo passwd ${username}`, (err, stdout) => {
+    exec(`useradd -p "${username}" ${username}`, (err, stdout) => {
         //log usercreated
         showUrl(username, userId);
     });
