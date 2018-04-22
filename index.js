@@ -9,12 +9,12 @@ const ERRORS = {
 const bot = new TelegramBot(TOKEN, {polling: true});
 
 bot.onText(/(.*)/, function (msg, match) {
+    const userId = msg.from.id;
     if (match[1] === 'ping') {
         bot.sendMessage(userId, '200');
         return;
     }
-
-    const userId = msg.from.id;
+    
     if (msg.chat.type !== 'private') {
         //log request from chat
         bot.sendMessage(userId, ERRORS.NOT_PRIVATE);
