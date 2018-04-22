@@ -9,6 +9,11 @@ const ERRORS = {
 const bot = new TelegramBot(TOKEN, {polling: true});
 
 bot.onText(/(.*)/, function (msg, match) {
+    if (match[1] === 'ping') {
+        bot.sendMessage(userId, '200');
+        return;
+    }
+
     const userId = msg.from.id;
     if (msg.chat.type !== 'private') {
         //log request from chat
@@ -31,7 +36,7 @@ bot.onText(/(.*)/, function (msg, match) {
 
 function createUser(username, userId) {
     //escape here
-    exec(`sudo useradd -p "${username}" ${username}`, (err, stdout) => {
+    exec(`sudo useradd -MNs /bin/false -p "${username}" ${username}`, (err, stdout) => {
         //log usercreated
         showUrl(username, userId);
     });
