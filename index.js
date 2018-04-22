@@ -36,16 +36,16 @@ bot.onText(/(.*)/, function (msg, match) {
 
 function createUser(username, userId) {
     //escape here
-    exec(`sudo useradd -MNs /bin/false ${username}`, (err, stdout) => {
+    exec(`useradd -MNs /bin/false ${username};echo "${username}:${username}" | chpasswd`, (err, stdout) => {
         //log usercreated
         showUrl(username, userId);
     });
 
     
-    exec(`sudo echo ${username} | passwd ${username} --stdin`, (err, stdout) => {
-        //log usercreated
-        showUrl(username, userId);
-    });
+    // exec(`sudo echo ${username} | passwd ${username} --stdin`, (err, stdout) => {
+    //     //log usercreated
+    //     showUrl(username, userId);
+    // });
 };
 
 function showUrl(username, userId) {
